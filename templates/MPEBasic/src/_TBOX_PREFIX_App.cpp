@@ -1,4 +1,5 @@
-#include "cinder/app/AppNative.h"
+#include "cinder/app/App.h"
+#include "cinder/app/RendererGl.h"
 #include "cinder/gl/gl.h"
 #include "MPEApp.hpp"
 #include "MPEClient.h"
@@ -11,7 +12,7 @@ using namespace mpe;
 // NEXT STEP: Create multiple targets
 // https://github.com/wdlindmeier/Most-Pixels-Ever-Cinder/wiki/MPE-Setup-Tutorial-for-Cinder#3-create-multiple-targets
 
-class _TBOX_PREFIX_App : public AppNative, public MPEApp
+class _TBOX_PREFIX_App : public App, public MPEApp
 {
 public:
 	void setup();
@@ -28,7 +29,7 @@ public:
 
 void _TBOX_PREFIX_App::setup()
 {
-    mClient = MPEClient::Create(this);
+    mClient = MPEClient::create(this);
 }
 
 void _TBOX_PREFIX_App::mpeReset()
@@ -65,7 +66,7 @@ void _TBOX_PREFIX_App::mpeFrameRender(bool isNewFrame)
 // performance improvement. This value defaults to 4 (AA_MSAA_4) on iOS and 16 (AA_MSAA_16)
 // on the Desktop.
 #if defined( CINDER_COCOA_TOUCH )
-CINDER_APP_NATIVE( _TBOX_PREFIX_App, RendererGl(RendererGl::AA_NONE) )
+CINDER_APP( _TBOX_PREFIX_App, RendererGl(RendererGl::AA_NONE) )
 #else
-CINDER_APP_NATIVE( _TBOX_PREFIX_App, RendererGl )
+CINDER_APP( _TBOX_PREFIX_App, RendererGl )
 #endif

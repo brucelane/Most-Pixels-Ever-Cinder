@@ -377,12 +377,13 @@ void MPEBouncingBallApp::mpeFrameRender(bool isNewFrame)
     gl::color(0.2,0.2,0.2);
     gl::enableAlphaBlending();
     std::ostringstream stringStream;
-    stringStream << "Client ID: " << std::to_string(CLIENT_ID) << std::endl;
-    stringStream << "FPS: " << std::to_string((int)getAverageFps()) << std::endl;
+	//stringStream << "Client ID: " << std::to_string(CLIENT_ID) << std::endl;
+	stringStream << "Client ID: " << std::to_string(0) << std::endl;
+	stringStream << "FPS: " << std::to_string((int)getAverageFps()) << std::endl;
     stringStream << "Frame Num: " << std::to_string(mClient->getCurrentRenderFrame()) << std::endl;
     stringStream << "Updates Per Second: " << std::to_string((int)mClient->getUpdatesPerSecond());
     string str = stringStream.str();
-    vec2 stringSize = mTextureFont->measureStringWrapped(str, Rectf(0,0,400,400));
+	vec2 stringSize = vec2(400, 400);// mTextureFont->measureStringWrapped(str, Rectf(0, 0, 400, 400));
     vec2 stringOffset(40,40);
     vec2 rectOffset = mClient->getVisibleRect().getUpperLeft() + stringOffset;
     gl::drawSolidRect(Rectf(rectOffset.x - 10,
